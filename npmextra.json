@@ -1,0 +1,10 @@
+{
+  "npmts": {
+    "coverageTreshold": 30
+  },
+  "npmci": {
+    "globalNpmTools": [
+      "npmts"
+    ]
+  }
+}

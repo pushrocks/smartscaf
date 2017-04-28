@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "scaffold projects quickly",
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "(npmts)"
   },
@@ -20,5 +21,13 @@
     "scaffold",
     "polymer",
     "npm"
-  ]
+  ],
+  "devDependencies": {
+    "tapbundle": "^1.0.10"
+  },
+  "dependencies": {
+    "smartfile": "^4.1.10",
+    "smarthbs": "^1.0.8",
+    "smartq": "^1.1.1"
+  }
 }
