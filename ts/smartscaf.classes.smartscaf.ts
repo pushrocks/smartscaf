@@ -12,18 +12,23 @@ export interface ScafTemplateContructorOptions {
 export class ScafTemplate {
   name: string
   description: string
-  templateObject: Smartfile[]
-  requiredVariables: any[]
-  constructor() {}
+  templateSmartfileArray: Smartfile[]
+  requiredVariables: string[]
+  suppliedVariables: any
 
   /**
    * read a template from a directory
    */
   async readTemplateFromDir (dirArg: string) {
-    this.templateObject = await plugins.smartfile.fs.fileTreeToObject(dirArg, '**/*')
+    this.templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(dirArg, '**/*')
+    this._findVariablesInTemplate()
   }
 
-  async writeWithVariables (variablesArg) {
+  /**
+   * supply the variables to render the teplate with
+   * @param variablesArg
+   */
+  async supplyVariables (variablesArg) {
     await this._checkSuppliedVariables(variablesArg)
   }
 
@@ -31,13 +36,15 @@ export class ScafTemplate {
    * finds all variables in a Template
    */
   private async _findVariablesInTemplate () {
-
+    for (let localSmartfile of this.templateSmartfileArray) {
+      
+    }
   }
 
   /**
    * checks if supplied Variables satisfy the template
    */
   private async _checkSuppliedVariables (variablesArg) {
-
+    
   }
 }

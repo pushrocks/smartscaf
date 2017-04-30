@@ -16,8 +16,8 @@
     "@types/chai" "*"
 
 "@types/chai@*", "@types/chai@^3.4.35":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-3.5.1.tgz#9bd77fe12503ae00648b0945b38eab666adffe2e"
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-3.5.2.tgz#c11cd2817d3a401b7ba0f5a420f35c56139b1c1e"
 
 "@types/fs-extra@2.x.x":
   version "2.1.0"
@@ -224,8 +224,8 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
 handlebars@^4.0.6:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.6.tgz#2ce4484850537f9c97a8026d5399b935c4ed4ed7"
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.7.tgz#e97325aeb8ea0b9e12b9c4dd73c4c312ad0ede59"
   dependencies:
     async "^1.4.0"
     optimist "^0.6.1"
@@ -448,8 +448,8 @@ smartdelay@^1.0.1:
     typings-global "^1.0.14"
 
 smartfile@^4.1.10, smartfile@^4.1.8:
-  version "4.1.10"
-  resolved "https://registry.yarnpkg.com/smartfile/-/smartfile-4.1.10.tgz#b06cfcd26301c5d235ed331fb8145fa38714765d"
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/smartfile/-/smartfile-4.2.1.tgz#2ec85f803f771a1ddff377a438ae87aab25f3e6e"
   dependencies:
     "@types/fs-extra" "2.x.x"
     "@types/vinyl" "^2.0.0"
