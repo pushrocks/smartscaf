@@ -10,7 +10,13 @@ tap.test('should create new Smartscaf instance', async () => {
 })
 
 tap.test('Smartscaf instance -> should read a template directory', async () => {
-  testScafTemplate.readTemplateFromDir('./test/test_template')
+  await testScafTemplate.readTemplateFromDir('./test/test_template')
+  expect(testScafTemplate.templateSmartfileArray.length).to.equal(3)
+})
+
+tap.test('smartfile -> should accept variables', async () => {
+  await testScafTemplate.supplyVariables({})
+  console.log(testScafTemplate.missingVariables)
 })
 
 tap.start()

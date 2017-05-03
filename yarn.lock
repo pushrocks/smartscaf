@@ -29,9 +29,13 @@
   version "4.0.32"
   resolved "https://registry.yarnpkg.com/@types/handlebars/-/handlebars-4.0.32.tgz#637e8d945a9354aab47df7125005490fe9f8e592"
 
+"@types/lodash@^4.14.63":
+  version "4.14.63"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.63.tgz#5ac475f55bfdc62bc88c4239dbc482f2f3bead93"
+
 "@types/node@*":
-  version "7.0.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.14.tgz#1470fa002a113316ac9d9ad163fc738c7a0de2a4"
+  version "7.0.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.15.tgz#628429289604c5f7e56c13f3a0422f3e59df1a17"
 
 "@types/promises-a-plus@*":
   version "0.0.27"
@@ -223,7 +227,7 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
-handlebars@^4.0.6:
+handlebars@^4.0.7:
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.7.tgz#e97325aeb8ea0b9e12b9c4dd73c4c312ad0ede59"
   dependencies:
@@ -305,6 +309,10 @@ leakage@^0.2.0:
 left-pad@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.1.3.tgz#612f61c033f3a9e08e939f1caebeea41b6f3199a"
+
+lodash@^4.17.4:
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 longest@^1.0.1:
   version "1.0.1"
@@ -447,9 +455,9 @@ smartdelay@^1.0.1:
   dependencies:
     typings-global "^1.0.14"
 
-smartfile@^4.1.10, smartfile@^4.1.8:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/smartfile/-/smartfile-4.2.1.tgz#2ec85f803f771a1ddff377a438ae87aab25f3e6e"
+smartfile@^4.2.9:
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/smartfile/-/smartfile-4.2.9.tgz#afcd1160049cbe26a86e42e842c86e8b748e69e7"
   dependencies:
     "@types/fs-extra" "2.x.x"
     "@types/vinyl" "^2.0.0"
@@ -464,15 +472,17 @@ smartfile@^4.1.10, smartfile@^4.1.8:
     vinyl "^2.0.2"
     vinyl-file "^3.0.0"
 
-smarthbs@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/smarthbs/-/smarthbs-1.0.8.tgz#9ff4fc2fc0643c83a80a270d3c8ea160d47f5a5d"
+smarthbs@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/smarthbs/-/smarthbs-1.0.11.tgz#bb6a0c279fa6a22c4dffc2cc1a08e68e581251a3"
   dependencies:
     "@types/handlebars" "^4.0.32"
-    handlebars "^4.0.6"
-    smartfile "^4.1.8"
+    "@types/lodash" "^4.14.63"
+    handlebars "^4.0.7"
+    lodash "^4.17.4"
+    smartfile "^4.2.9"
     smartq "^1.1.1"
-    typings-global "^1.0.14"
+    typings-global "^1.0.16"
 
 smartpath@^3.2.8:
   version "3.2.8"

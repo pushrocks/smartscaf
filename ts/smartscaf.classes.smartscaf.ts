@@ -15,12 +15,14 @@ export class ScafTemplate {
   templateSmartfileArray: Smartfile[]
   requiredVariables: string[]
   suppliedVariables: any
+  missingVariables: string[] = []
 
   /**
    * read a template from a directory
    */
-  async readTemplateFromDir (dirArg: string) {
-    this.templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(dirArg, '**/*')
+  async readTemplateFromDir (dirPathArg: string) {
+    let dirPath = plugins.path.resolve(dirPathArg)
+    this.templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(dirPath, '**/*')
     this._findVariablesInTemplate()
   }
 
@@ -29,22 +31,33 @@ export class ScafTemplate {
    * @param variablesArg
    */
   async supplyVariables (variablesArg) {
-    await this._checkSuppliedVariables(variablesArg)
+    this.suppliedVariables = variablesArg
+    this.missingVariables = await this._checkSuppliedVariables(variablesArg)
   }
 
   /**
    * finds all variables in a Template
    */
-  private async _findVariablesInTemplate () {
+  private async _findVariablesInTemplate() {
     for (let localSmartfile of this.templateSmartfileArray) {
-      
+
     }
   }
 
   /**
    * checks if supplied Variables satisfy the template
    */
-  private async _checkSuppliedVariables (variablesArg) {
+  private async _checkSuppliedVariables(variablesArg) {
+    let missingVars: string[] = []
+    for (let templateSmartFile of this.templateSmartfileArray) {
+      console.log(templateSmartFile)
+      let localMissingVars = await plugins.smarthbs.checkVarsSatisfaction(
+        templateSmartFile.contents.toString(),
+        variablesArg
+      )
+      missingVars = plugins.lodash.concat(missingVars, localMissingVars)
+    }
     
+    return missingVars
   }
 }

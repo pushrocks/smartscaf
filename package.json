@@ -26,8 +26,11 @@
     "tapbundle": "^1.0.10"
   },
   "dependencies": {
-    "smartfile": "^4.1.10",
-    "smarthbs": "^1.0.8",
-    "smartq": "^1.1.1"
+    "@types/lodash": "^4.14.63",
+    "lodash": "^4.17.4",
+    "smartfile": "^4.2.9",
+    "smarthbs": "^1.0.11",
+    "smartq": "^1.1.1",
+    "typings-global": "^1.0.16"
   }
 }
