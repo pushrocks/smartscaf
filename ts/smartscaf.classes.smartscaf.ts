@@ -36,6 +36,14 @@ export class ScafTemplate {
   }
 
   /**
+   * Will ask for the missing variables by cli interaction
+   */
+  async askForMissingVariables () {
+    this.missingVariables = await this._checkSuppliedVariables(variablesArg)
+    
+  }
+
+  /**
    * finds all variables in a Template
    */
   private async _findVariablesInTemplate() {
@@ -50,7 +58,6 @@ export class ScafTemplate {
   private async _checkSuppliedVariables(variablesArg) {
     let missingVars: string[] = []
     for (let templateSmartFile of this.templateSmartfileArray) {
-      console.log(templateSmartFile)
       let localMissingVars = await plugins.smarthbs.checkVarsSatisfaction(
         templateSmartFile.contents.toString(),
         variablesArg
