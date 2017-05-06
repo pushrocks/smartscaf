@@ -19,4 +19,8 @@ tap.test('smartfile -> should accept variables', async () => {
   console.log(testScafTemplate.missingVariables)
 })
 
+tap.test('ask cli', async () => {
+  await testScafTemplate.askCliForMissingVariables()
+})
+
 tap.start()

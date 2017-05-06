@@ -21,11 +21,15 @@ export declare class ScafTemplate {
      */
     supplyVariables(variablesArg: any): Promise<void>;
     /**
+     * Will ask for the missing variables by cli interaction
+     */
+    askCliForMissingVariables(): Promise<void>;
+    /**
      * finds all variables in a Template
      */
     private _findVariablesInTemplate();
     /**
      * checks if supplied Variables satisfy the template
      */
-    private _checkSuppliedVariables(variablesArg);
+    private _checkSuppliedVariables();
 }
