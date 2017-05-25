@@ -2,6 +2,8 @@ import { expect, tap } from 'tapbundle'
 
 import * as smartscaf from '../dist/index'
 
+process.env.CI = 'true'
+
 let testScafTemplate: smartscaf.ScafTemplate
 
 tap.test('should create new Smartscaf instance', async () => {
@@ -11,7 +13,7 @@ tap.test('should create new Smartscaf instance', async () => {
 
 tap.test('Smartscaf instance -> should read a template directory', async () => {
   await testScafTemplate.readTemplateFromDir('./test/test_template')
-  expect(testScafTemplate.templateSmartfileArray.length).to.equal(3)
+  expect(testScafTemplate.templateSmartfileArray.length).to.equal(4)
 })
 
 tap.test('smartfile -> should accept variables', async () => {

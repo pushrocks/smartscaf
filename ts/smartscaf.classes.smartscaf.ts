@@ -1,4 +1,5 @@
 import * as plugins from './smartscaf.plugins'
+import * as helpers from './smartscaf.helpers'
 
 // interfaces
 import { Smartfile } from 'smartfile'
@@ -14,7 +15,8 @@ export class ScafTemplate {
   description: string
   templateSmartfileArray: Smartfile[]
   requiredVariables: string[]
-  suppliedVariables: any
+  defaultVariables: any
+  suppliedVariables: any = {}
   missingVariables: string[] = []
 
   /**
@@ -23,15 +25,17 @@ export class ScafTemplate {
   async readTemplateFromDir (dirPathArg: string) {
     let dirPath = plugins.path.resolve(dirPathArg)
     this.templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(dirPath, '**/*')
-    this._findVariablesInTemplate()
+    await this._findVariablesInTemplate()
+    await this._checkSuppliedVariables()
+    await this._checkDefaultVariables()
   }
 
   /**
    * supply the variables to render the teplate with
-   * @param variablesArg
+   * @param variablesArg gets merged with this.suppliedVariables
    */
   async supplyVariables (variablesArg) {
-    this.suppliedVariables = variablesArg
+    this.suppliedVariables = plugins.lodash.merge(this.suppliedVariables, variablesArg)
     this.missingVariables = await this._checkSuppliedVariables()
   }
 
@@ -45,35 +49,76 @@ export class ScafTemplate {
       localSmartInteract.addQuestions([{
         name: missingVariable,
         type: 'input',
-        default: `undefined ${missingVariable}`,
+        default: (() => {
+          if (this.defaultVariables[missingVariable]) {
+            return this.defaultVariables[missingVariable]
+          } else {
+            return 'undefined variable'
+          }
+        })(),
         message: `What is the value of ${missingVariable}?`
       }])
     }
-    let answers = await localSmartInteract.runQueue()
+    let answerBucket = await localSmartInteract.runQueue()
+    answerBucket.answerMap.forEach(async answer => {
+      await helpers.deepAddToObject(this.suppliedVariables, answer.name, answer.value)
+    })
+
   }
 
   /**
-   * finds all variables in a Template
+   * finds all variables in a Template in as string
+   * e.g. myobject.someKey and myobject.someOtherKey
    */
-  private async _findVariablesInTemplate() {
-    for (let localSmartfile of this.templateSmartfileArray) {
-
+  private async _findVariablesInTemplate () {
+    let templateVariables: string[] = []
+    for (let templateSmartfile of this.templateSmartfileArray) {
+      let localTemplateVariables = await plugins.smarthbs.findVarsInHbsString(templateSmartfile.contents.toString())
+      templateVariables = plugins.lodash.concat(templateVariables, localTemplateVariables)
     }
+    templateVariables = plugins.lodash.uniq(templateVariables)
   }
 
   /**
    * checks if supplied Variables satisfy the template
    */
-  private async _checkSuppliedVariables() {
+  private async _checkSuppliedVariables () {
     let missingVars: string[] = []
-    for (let templateSmartFile of this.templateSmartfileArray) {
+    for (let templateSmartfile of this.templateSmartfileArray) {
       let localMissingVars = await plugins.smarthbs.checkVarsSatisfaction(
-        templateSmartFile.contents.toString(),
+        templateSmartfile.contents.toString(),
         this.suppliedVariables
       )
       missingVars = plugins.lodash.concat(missingVars, localMissingVars)
-      missingVars = plugins.lodash.uniq(missingVars)
     }
+    missingVars = plugins.lodash.uniq(missingVars)
     return missingVars
+  }
+
+  /**
+   * checks the default.yml at the root of a template for default variables
+   * allows 2 ways of notation in YAML:
+   * >> myObject.myKey.someDeeperKey: someValue
+   * >> myObject.yourKey.yourDeeperKey: yourValue
+   * or
+   * >> myObject:
+   * >>   - someKey:
+   * >>     - someDeeperKey: someValue
+   * >>   - yourKey:
+   * >>     - yourDeeperKey: yourValue
+   */
+  private async _checkDefaultVariables () {
+    let defaultsSmartfile = this.templateSmartfileArray.filter(smartfileArg => {
+      return smartfileArg.parsedPath.base === 'defaults.yml'
+    })[0]
+
+    if (defaultsSmartfile) {
+      let defaultObject = await plugins.smartyaml.yamlStringToObject(
+        defaultsSmartfile.contents.toString()
+      )
+      this.defaultVariables = defaultObject
+    } else {
+      this.defaultVariables = {}
+    }
   }
 }

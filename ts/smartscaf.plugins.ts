@@ -5,6 +5,7 @@ import * as smartfile from 'smartfile'
 import * as smarthbs from 'smarthbs'
 import * as smartinteract from 'smartinteract'
 import * as smartq from 'smartq'
+import * as smartyaml from 'smartyaml'
 
 export {
   lodash,
@@ -12,5 +13,6 @@ export {
   smartfile,
   smarthbs,
   smartinteract,
-  smartq
+  smartq,
+  smartyaml
 }
