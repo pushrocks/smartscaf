@@ -827,9 +827,9 @@ smartenv@^2.0.0:
     smartq "^1.1.1"
     typings-global "^1.0.14"
 
-smartfile@^4.2.11, smartfile@^4.2.12:
-  version "4.2.12"
-  resolved "https://registry.yarnpkg.com/smartfile/-/smartfile-4.2.12.tgz#6acda7f2e7626b7c81280f35f97334a1d856d176"
+smartfile@^4.2.11, smartfile@^4.2.13:
+  version "4.2.13"
+  resolved "https://registry.yarnpkg.com/smartfile/-/smartfile-4.2.13.tgz#4c1f96eb2f56bc6f400c13086272cd3b4c5a2c68"
   dependencies:
     "@types/fs-extra" "3.x.x"
     "@types/vinyl" "^2.0.0"
