@@ -827,9 +827,9 @@ smartenv@^2.0.0:
     smartq "^1.1.1"
     typings-global "^1.0.14"
 
-smartfile@^4.2.11:
-  version "4.2.11"
-  resolved "https://registry.yarnpkg.com/smartfile/-/smartfile-4.2.11.tgz#20bb3a1411722688135499520de2fd00985becdb"
+smartfile@^4.2.11, smartfile@^4.2.12:
+  version "4.2.12"
+  resolved "https://registry.yarnpkg.com/smartfile/-/smartfile-4.2.12.tgz#6acda7f2e7626b7c81280f35f97334a1d856d176"
   dependencies:
     "@types/fs-extra" "3.x.x"
     "@types/vinyl" "^2.0.0"
@@ -844,9 +844,9 @@ smartfile@^4.2.11:
     vinyl "^2.0.2"
     vinyl-file "^3.0.0"
 
-smarthbs@^1.0.12:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/smarthbs/-/smarthbs-1.0.14.tgz#448a3f30d8c674dcc060ff8941f23c54c1e3af08"
+smarthbs@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/smarthbs/-/smarthbs-1.0.15.tgz#f7c68fbc90f4a03625b52e97cb242dc62bc72359"
   dependencies:
     "@types/handlebars" "^4.0.32"
     "@types/lodash" "^4.14.64"

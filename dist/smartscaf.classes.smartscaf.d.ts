@@ -25,6 +25,7 @@ export declare class ScafTemplate {
      * Will ask for the missing variables by cli interaction
      */
     askCliForMissingVariables(): Promise<void>;
+    writeToDisk(destinationDirArg: any): Promise<void>;
     /**
      * finds all variables in a Template in as string
      * e.g. myobject.someKey and myobject.someOtherKey

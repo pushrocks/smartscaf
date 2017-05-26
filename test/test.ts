@@ -1,4 +1,5 @@
 import { expect, tap } from 'tapbundle'
+import * as path from 'path'
 
 import * as smartscaf from '../dist/index'
 
@@ -23,6 +24,10 @@ tap.test('smartfile -> should accept variables', async () => {
 
 tap.test('ask cli', async () => {
   await testScafTemplate.askCliForMissingVariables()
+})
+
+tap.test('should output ready rendered template', async () => {
+  await testScafTemplate.writeToDisk(path.resolve('./test/test_output'))
 })
 
 tap.start()
