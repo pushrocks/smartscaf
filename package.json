@@ -23,12 +23,12 @@
     "npm"
   ],
   "devDependencies": {
-    "tapbundle": "^1.0.12"
+    "tapbundle": "^1.0.13"
   },
   "dependencies": {
     "@types/lodash": "^4.14.64",
     "lodash": "^4.17.4",
-    "smartfile": "^4.2.13",
+    "smartfile": "^4.2.15",
     "smarthbs": "^1.0.15",
     "smartinteract": "^1.0.4",
     "smartq": "^1.1.1",
