@@ -1,2 +1,4 @@
 templateVar1: from default yaml
 templateVar2: this is another value from yml
+templateObject.value1: wow
+templateObject.value2: here
