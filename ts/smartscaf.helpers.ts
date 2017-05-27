@@ -18,8 +18,6 @@ export let deepAddToObject = async (objectArg, varStringArg: string, valueArg: s
     })()
 
     // build the tree in suppliedVariables
-    console.log(referencePointer)
-    console.log(varName)
     if (!referencePointer[varName] && !varNameNext) {
       referencePointer[varName] = valueArg
       referencePointer = null
