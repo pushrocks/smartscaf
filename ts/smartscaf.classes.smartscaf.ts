@@ -69,12 +69,22 @@ export class ScafTemplate {
   async writeToDisk (destinationDirArg) {
     let smartfileArrayToWrite = plugins.lodash.cloneDeep(this.templateSmartfileArray)
     for (let smartfile of smartfileArrayToWrite) {
+
+      // render the template
       let template = await plugins.smarthbs.getTemplateForString(
         smartfile.contents.toString()
       )
       let renderedTemplateString = template(this.suppliedVariables)
-      smartfile.contents = Buffer.from(renderedTemplateString)
+
+      // handle frontmatter
+      let parsedTemplate = plugins.smartfm.parse(renderedTemplateString)
+      if (parsedTemplate.data.fileName) {
+        smartfile.updateFileName(parsedTemplate.data.fileName)
+      }
+
+      smartfile.contents = Buffer.from(parsedTemplate.content)
     }
+
     await plugins.smartfile.memory.smartfileArrayToFs(smartfileArrayToWrite, destinationDirArg)
   }
 

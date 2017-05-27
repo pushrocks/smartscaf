@@ -28,7 +28,8 @@
   "dependencies": {
     "@types/lodash": "^4.14.64",
     "lodash": "^4.17.4",
-    "smartfile": "^4.2.15",
+    "smartfile": "^4.2.16",
+    "smartfm": "^1.0.5",
     "smarthbs": "^1.0.15",
     "smartinteract": "^1.0.4",
     "smartq": "^1.1.1",
