@@ -50,7 +50,7 @@ export class ScafTemplate {
         name: missingVariable,
         type: 'input',
         default: (() => {
-          if (this.defaultVariables[missingVariable]) {
+          if (this.defaultVariables && this.defaultVariables[missingVariable]) {
             return this.defaultVariables[missingVariable]
           } else {
             return 'undefined variable'

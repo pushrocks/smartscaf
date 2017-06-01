@@ -49,8 +49,8 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-2.0.29.tgz#5002e14f75e2d71e564281df0431c8c1b4a2a36a"
 
 "@types/node@*", "@types/node@^6.0.48":
-  version "6.0.73"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.73.tgz#85dc4bb6f125377c75ddd2519a1eeb63f0a4ed70"
+  version "6.0.74"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.74.tgz#b0cd70c87c7ba950f569dd42035b10656295e259"
 
 "@types/promises-a-plus@*":
   version "0.0.27"
@@ -885,9 +885,9 @@ smartfm@^1.0.5:
     gray-matter "^2.1.0"
     typings-global "^1.0.14"
 
-smarthbs@^1.0.15:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/smarthbs/-/smarthbs-1.0.15.tgz#f7c68fbc90f4a03625b52e97cb242dc62bc72359"
+smarthbs@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/smarthbs/-/smarthbs-1.0.16.tgz#6ae319c289a0421a574619ea7e31a4c2df82eeb5"
   dependencies:
     "@types/handlebars" "^4.0.32"
     "@types/lodash" "^4.14.64"
