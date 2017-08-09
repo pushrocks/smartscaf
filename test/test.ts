@@ -3,7 +3,7 @@ import * as path from 'path'
 
 import * as smartscaf from '../ts/index'
 
-process.env.CI = 'true'
+// process.env.CI = 'true'
 
 let testScafTemplate: smartscaf.ScafTemplate
 
@@ -24,6 +24,10 @@ tap.test('smartfile -> should accept variables', async () => {
 
 tap.test('ask cli', async () => {
   await testScafTemplate.askCliForMissingVariables()
+})
+
+tap.test('should have valid supplied variables', async () => {
+  console.log(testScafTemplate.suppliedVariables)
 })
 
 tap.test('should output ready rendered template', async () => {
