@@ -1,7 +1,7 @@
 import { expect, tap } from 'tapbundle'
 import * as path from 'path'
 
-import * as smartscaf from '../dist/index'
+import * as smartscaf from '../ts/index'
 
 process.env.CI = 'true'
 
