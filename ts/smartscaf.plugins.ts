@@ -1,20 +1,9 @@
-import 'typings-global'
-import * as lodash from 'lodash'
-import * as path from 'path'
-import * as smartfile from 'smartfile'
-import * as smartfm from 'smartfm'
-import * as smarthbs from 'smarthbs'
-import * as smartinteract from 'smartinteract'
-import * as smartq from 'smartq'
-import * as smartyaml from 'smartyaml'
+import * as path from 'path';
+import * as smartfile from '@pushrocks/smartfile';
+import * as smartfm from '@pushrocks/smartfm';
+import * as smarthbs from '@pushrocks/smarthbs';
+import * as smartinteract from '@pushrocks/smartinteract';
+import * as smartq from '@pushrocks/smartpromise';
+import * as smartyaml from '@pushrocks/smartyaml';
 
-export {
-  lodash,
-  path,
-  smartfile,
-  smartfm,
-  smarthbs,
-  smartinteract,
-  smartq,
-  smartyaml
-}
+export { path, smartfile, smartfm, smarthbs, smartinteract, smartq, smartyaml };

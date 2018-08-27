@@ -1,8 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("typings-global");
-const lodash = require("lodash");
-exports.lodash = lodash;
 const path = require("path");
 exports.path = path;
 const smartfile = require("smartfile");
@@ -17,4 +14,4 @@ const smartq = require("smartq");
 exports.smartq = smartq;
 const smartyaml = require("smartyaml");
 exports.smartyaml = smartyaml;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic21hcnRzY2FmLnBsdWdpbnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi90cy9zbWFydHNjYWYucGx1Z2lucy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDBCQUF1QjtBQUN2QixpQ0FBZ0M7QUFVOUIsd0JBQU07QUFUUiw2QkFBNEI7QUFVMUIsb0JBQUk7QUFUTix1Q0FBc0M7QUFVcEMsOEJBQVM7QUFUWCxtQ0FBa0M7QUFVaEMsMEJBQU87QUFUVCxxQ0FBb0M7QUFVbEMsNEJBQVE7QUFUViwrQ0FBOEM7QUFVNUMsc0NBQWE7QUFUZixpQ0FBZ0M7QUFVOUIsd0JBQU07QUFUUix1Q0FBc0M7QUFVcEMsOEJBQVMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic21hcnRzY2FmLnBsdWdpbnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi90cy9zbWFydHNjYWYucGx1Z2lucy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZCQUE0QjtBQVMxQixvQkFBSTtBQVJOLHVDQUFzQztBQVNwQyw4QkFBUztBQVJYLG1DQUFrQztBQVNoQywwQkFBTztBQVJULHFDQUFvQztBQVNsQyw0QkFBUTtBQVJWLCtDQUE4QztBQVM1QyxzQ0FBYTtBQVJmLGlDQUFnQztBQVM5Qix3QkFBTTtBQVJSLHVDQUFzQztBQVNwQyw4QkFBUyJ9

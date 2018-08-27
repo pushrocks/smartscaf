@@ -1,11 +1,13 @@
 {
-  "name": "smartscaf",
+  "name": "@pushrocks/smartscaf",
   "version": "1.0.14",
+  "private": false,
   "description": "scaffold projects quickly",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "(npmts)",
+    "test": "(tstest test/)",
+    "build": "(tsbuild)",
     "testLocal": "(npmts --notest && ts-node --compilerOptions '{\"target\":\"es6\"}' test/test.ts)"
   },
   "repository": {
@@ -24,17 +26,20 @@
     "npm"
   ],
   "devDependencies": {
-    "tapbundle": "^1.1.1"
+    "@gitzone/tsbuild": "^2.0.22",
+    "@gitzone/tsrun": "^1.1.12",
+    "@gitzone/tstest": "^1.0.15",
+    "@pushrocks/tapbundle": "^3.0.5",
+    "@types/node": "^10.9.2"
   },
   "dependencies": {
+    "@pushrocks/smartfile": "^6.0.8",
+    "@pushrocks/smartfm": "^2.0.1",
+    "@pushrocks/smarthbs": "^2.0.0",
+    "@pushrocks/smartinteract": "^2.0.4",
+    "@pushrocks/smartpromise": "^2.0.5",
+    "@pushrocks/smartyaml": "^2.0.3",
     "@types/lodash": "^4.14.72",
-    "lodash": "^4.17.4",
-    "smartfile": "^4.2.20",
-    "smartfm": "^1.0.5",
-    "smarthbs": "^1.0.16",
-    "smartinteract": "^1.0.10",
-    "smartq": "^1.1.6",
-    "smartyaml": "^1.0.2",
-    "typings-global": "^1.0.20"
+    "lodash": "^4.17.4"
   }
 }

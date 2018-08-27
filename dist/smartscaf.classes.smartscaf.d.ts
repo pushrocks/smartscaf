@@ -30,11 +30,11 @@ export declare class ScafTemplate {
      * finds all variables in a Template in as string
      * e.g. myobject.someKey and myobject.someOtherKey
      */
-    private _findVariablesInTemplate();
+    private _findVariablesInTemplate;
     /**
      * checks if supplied Variables satisfy the template
      */
-    private _checkSuppliedVariables();
+    private _checkSuppliedVariables;
     /**
      * checks the default.yml at the root of a template for default variables
      * allows 2 ways of notation in YAML:
@@ -47,5 +47,5 @@ export declare class ScafTemplate {
      * >>   - yourKey:
      * >>     - yourDeeperKey: yourValue
      */
-    private _checkDefaultVariables();
+    private _checkDefaultVariables;
 }

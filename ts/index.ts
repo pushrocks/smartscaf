@@ -1,1 +1,1 @@
-export * from './smartscaf.classes.smartscaf'
+export * from './smartscaf.classes.smartscaf';
