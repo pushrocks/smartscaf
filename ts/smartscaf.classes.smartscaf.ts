@@ -19,6 +19,8 @@ export class ScafTemplate {
   suppliedVariables: any = {};
   missingVariables: string[] = [];
 
+  dependencies: ScafTemplate[];
+
   /**
    * read a template from a directory
    */
@@ -28,6 +30,7 @@ export class ScafTemplate {
     await this._findVariablesInTemplate();
     await this._checkSuppliedVariables();
     await this._checkDefaultVariables();
+    await this._resolveTemplateDependencies();
   }
 
   /**
@@ -152,5 +155,20 @@ export class ScafTemplate {
     } else {
       this.defaultVariables = {};
     }
+  }
+
+  /**
+   * resolve template dependencies
+   */
+  private async _resolveTemplateDependencies() {
+    const dependencies = this.templateSmartfileArray.find(smartfileArg => {
+      return smartfileArg.parsedPath.base === "dependencies.yml"
+    });
+    if(!dependencies) {
+      console.log('No further template dependencies defined!');
+      return;
+    }
+    console.log('Found template dependencies! Resolving them now!')
+
   }
 }

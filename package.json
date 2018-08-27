@@ -33,6 +33,7 @@
     "@types/node": "^10.9.2"
   },
   "dependencies": {
+    "@pushrocks/lik": "^3.0.1",
     "@pushrocks/smartfile": "^6.0.8",
     "@pushrocks/smartfm": "^2.0.1",
     "@pushrocks/smarthbs": "^2.0.0",
