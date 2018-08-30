@@ -11,26 +11,32 @@ export interface ScafTemplateContructorOptions {
 }
 
 export class ScafTemplate {
+  static async createTemplateFromDir() {
+
+  }
+
   name: string;
   description: string;
+  dirPath: string;
   templateSmartfileArray: Smartfile[];
   requiredVariables: string[];
   defaultVariables: any;
   suppliedVariables: any = {};
   missingVariables: string[] = [];
 
-  dependencies: ScafTemplate[];
+  constructor(dirPathArg: string) {
+    this.dirPath = plugins.path.resolve(dirPathArg);
+  }
 
   /**
    * read a template from a directory
    */
-  async readTemplateFromDir(dirPathArg: string) {
-    let dirPath = plugins.path.resolve(dirPathArg);
-    this.templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(dirPath, '**/*');
+  async readTemplateFromDir() {
+    this.templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(this.dirPath, '**/*');
+    await this._resolveTemplateDependencies();
     await this._findVariablesInTemplate();
     await this._checkSuppliedVariables();
     await this._checkDefaultVariables();
-    await this._resolveTemplateDependencies();
   }
 
   /**
@@ -161,14 +167,20 @@ export class ScafTemplate {
    * resolve template dependencies
    */
   private async _resolveTemplateDependencies() {
-    const dependencies = this.templateSmartfileArray.find(smartfileArg => {
+    const dependenciesSmartfile = this.templateSmartfileArray.find(smartfileArg => {
       return smartfileArg.parsedPath.base === "dependencies.yml"
     });
-    if(!dependencies) {
+    if(!dependenciesSmartfile) {
       console.log('No further template dependencies defined!');
       return;
     }
-    console.log('Found template dependencies! Resolving them now!')
-
+    console.log('Found template dependencies! Resolving them now!');
+    console.log('looking at templates to merge!')
+    const dependencies = await plugins.smartyaml.yamlStringToObject(dependenciesSmartfile.contentBuffer.toString());
+    for (const dependency of dependencies.merge) {
+      const templatePathToMerge = plugins.path.join(this.dirPath, dependency);
+      const templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(templatePathToMerge, '**/*');
+      this.templateSmartfileArray.concat(templateSmartfileArray);
+    }
   }
 }

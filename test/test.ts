@@ -8,12 +8,12 @@ process.env.CI = 'true'
 let testScafTemplate: smartscaf.ScafTemplate;
 
 tap.test('should create new Smartscaf instance', async () => {
-  testScafTemplate = new smartscaf.ScafTemplate();
+  testScafTemplate = new smartscaf.ScafTemplate('./test/test_template');
   expect(testScafTemplate).to.be.instanceof(smartscaf.ScafTemplate);
 });
 
 tap.test('Smartscaf instance -> should read a template directory', async () => {
-  await testScafTemplate.readTemplateFromDir('./test/test_template');
+  await testScafTemplate.readTemplateFromDir();
   expect(testScafTemplate.templateSmartfileArray.length).to.equal(5);
 });
 
