@@ -108,7 +108,6 @@ export class ScafTemplate {
 
       // render the template
       let template = await plugins.smarthbs.getTemplateForString(smartfile.contents.toString());
-      console.log(this.defaultVariables);
       let renderedTemplateString = template(this.suppliedVariables);
 
       // handle frontmatter
