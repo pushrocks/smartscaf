@@ -15,9 +15,24 @@ export class ScafTemplate {
 
   }
 
+  /**
+   * the name of the template
+   */
   name: string;
+
+  /**
+   * the descriptions of the template
+   */
   description: string;
+
+  /**
+   * the location on disk of the template
+   */
   dirPath: string;
+
+  /**
+   * the files of the template as array of Smartfiles
+   */
   templateSmartfileArray: Smartfile[];
   requiredVariables: string[];
   defaultVariables: any;
@@ -74,16 +89,26 @@ export class ScafTemplate {
       ]);
     }
     let answerBucket = await localSmartInteract.runQueue();
-    answerBucket.answerMap.forEach(async answer => {
+    await answerBucket.answerMap.forEach(async answer => {
       await helpers.deepAddToObject(this.suppliedVariables, answer.name, answer.value);
     });
   }
 
+  /**
+   * writes a file to disk
+   * @param destinationDirArg
+   */
   async writeToDisk(destinationDirArg) {
-    let smartfileArrayToWrite = this.templateSmartfileArray;
-    for (let smartfile of smartfileArrayToWrite) {
+    const smartfileArrayToWrite: Smartfile[] = [];
+    for (let smartfile of this.templateSmartfileArray) {
+      // lets filter out template files
+      if(smartfile.path === '.smartscaf.yml') {
+        continue;
+      }
+
       // render the template
       let template = await plugins.smarthbs.getTemplateForString(smartfile.contents.toString());
+      console.log(this.defaultVariables);
       let renderedTemplateString = template(this.suppliedVariables);
 
       // handle frontmatter
@@ -96,6 +121,7 @@ export class ScafTemplate {
       }
 
       smartfile.contents = Buffer.from(parsedTemplate.content);
+      smartfileArrayToWrite.push(smartfile);
     }
 
     await plugins.smartfile.memory.smartfileArrayToFs(smartfileArrayToWrite, destinationDirArg);
@@ -128,8 +154,12 @@ export class ScafTemplate {
         templateSmartfile.contents.toString(),
         this.suppliedVariables
       );
+
+      // combine with other missingVars
       missingVars = [...missingVars, ...localMissingVars];
     }
+
+    // dedupe
     missingVars = missingVars.filter((value, index, self) => {
       return self.indexOf(value) === index;
     });
@@ -137,7 +167,7 @@ export class ScafTemplate {
   }
 
   /**
-   * checks the default.yml at the root of a template for default variables
+   * checks the smartscaf.yml default values at the root of a template
    * allows 2 ways of notation in YAML:
    * >> myObject.myKey.someDeeperKey: someValue
    * >> myObject.yourKey.yourDeeperKey: yourValue
@@ -149,16 +179,21 @@ export class ScafTemplate {
    * >>     - yourDeeperKey: yourValue
    */
   private async _checkDefaultVariables() {
-    let defaultsSmartfile = this.templateSmartfileArray.filter(smartfileArg => {
-      return smartfileArg.parsedPath.base === 'defaults.yml';
-    })[0];
+    let smartscafSmartfile = this.templateSmartfileArray.find(smartfileArg => {
+      return smartfileArg.parsedPath.base === '.smartscaf.yml';
+    });
 
-    if (defaultsSmartfile) {
-      let defaultObject = await plugins.smartyaml.yamlStringToObject(
-        defaultsSmartfile.contents.toString()
+    if (smartscafSmartfile) {
+      const smartscafObject = await plugins.smartyaml.yamlStringToObject(
+        smartscafSmartfile.contents.toString()
       );
+      const defaultObject = smartscafObject.defaults;
       this.defaultVariables = defaultObject;
-    } else {
+    }
+
+    // safeguard against non existent defaults
+    if (!this.defaultVariables) {
+      console.log('this template does not specify defaults')
       this.defaultVariables = {};
     }
   }
@@ -167,20 +202,29 @@ export class ScafTemplate {
    * resolve template dependencies
    */
   private async _resolveTemplateDependencies() {
-    const dependenciesSmartfile = this.templateSmartfileArray.find(smartfileArg => {
-      return smartfileArg.parsedPath.base === "dependencies.yml"
+    const smartscafSmartfile = this.templateSmartfileArray.find(smartfileArg => {
+      return smartfileArg.parsedPath.base === '.smartscaf.yml';
     });
-    if(!dependenciesSmartfile) {
+    if(!smartscafSmartfile) {
       console.log('No further template dependencies defined!');
       return;
     }
     console.log('Found template dependencies! Resolving them now!');
-    console.log('looking at templates to merge!')
-    const dependencies = await plugins.smartyaml.yamlStringToObject(dependenciesSmartfile.contentBuffer.toString());
-    for (const dependency of dependencies.merge) {
+    console.log('looking at templates to merge!');
+    const smartscafYamlObject = await plugins.smartyaml.yamlStringToObject(smartscafSmartfile.contentBuffer.toString());
+    if(!smartscafYamlObject) {
+      console.log('Something seems strange about the supplied dependencies.yml file.');
+      return;
+    }
+    for (const dependency of smartscafYamlObject.dependencies.merge) {
+      console.log(`Now resolving ${dependency}`);
       const templatePathToMerge = plugins.path.join(this.dirPath, dependency);
+      if(!plugins.smartfile.fs.isDirectory(templatePathToMerge)) {
+        console.log(`dependency ${dependency} resolves to ${templatePathToMerge} which ist NOT a directory`);
+        continue;
+      };
       const templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(templatePathToMerge, '**/*');
-      this.templateSmartfileArray.concat(templateSmartfileArray);
+      this.templateSmartfileArray = this.templateSmartfileArray.concat(templateSmartfileArray);
     }
   }
 }

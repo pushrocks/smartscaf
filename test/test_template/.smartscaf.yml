@@ -1,0 +1,10 @@
+defaults:
+  templateVar1: from default yaml
+  templateVar2: this is another value from yml
+  templateObject.value1: wow
+  templateObject.value2: here
+  node_version: '10'
+
+dependencies:
+  merge:
+    - ../test_template_2
