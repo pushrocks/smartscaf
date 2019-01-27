@@ -11,9 +11,7 @@ export interface ScafTemplateContructorOptions {
 }
 
 export class ScafTemplate {
-  static async createTemplateFromDir() {
-
-  }
+  static async createTemplateFromDir() {}
 
   /**
    * the name of the template
@@ -102,7 +100,7 @@ export class ScafTemplate {
     const smartfileArrayToWrite: Smartfile[] = [];
     for (let smartfile of this.templateSmartfileArray) {
       // lets filter out template files
-      if(smartfile.path === '.smartscaf.yml') {
+      if (smartfile.path === '.smartscaf.yml') {
         continue;
       }
 
@@ -112,7 +110,7 @@ export class ScafTemplate {
 
       // handle frontmatter
       const smartfmInstance = new plugins.smartfm.Smartfm({
-        fmType: "yaml"
+        fmType: 'yaml'
       });
       let parsedTemplate = smartfmInstance.parse(renderedTemplateString) as any;
       if (parsedTemplate.data.fileName) {
@@ -192,7 +190,7 @@ export class ScafTemplate {
 
     // safeguard against non existent defaults
     if (!this.defaultVariables) {
-      console.log('this template does not specify defaults')
+      console.log('this template does not specify defaults');
       this.defaultVariables = {};
     }
   }
@@ -204,25 +202,32 @@ export class ScafTemplate {
     const smartscafSmartfile = this.templateSmartfileArray.find(smartfileArg => {
       return smartfileArg.parsedPath.base === '.smartscaf.yml';
     });
-    if(!smartscafSmartfile) {
+    if (!smartscafSmartfile) {
       console.log('No further template dependencies defined!');
       return;
     }
     console.log('Found template dependencies! Resolving them now!');
     console.log('looking at templates to merge!');
-    const smartscafYamlObject = await plugins.smartyaml.yamlStringToObject(smartscafSmartfile.contentBuffer.toString());
-    if(!smartscafYamlObject) {
+    const smartscafYamlObject = await plugins.smartyaml.yamlStringToObject(
+      smartscafSmartfile.contentBuffer.toString()
+    );
+    if (!smartscafYamlObject) {
       console.log('Something seems strange about the supplied dependencies.yml file.');
       return;
     }
     for (const dependency of smartscafYamlObject.dependencies.merge) {
       console.log(`Now resolving ${dependency}`);
       const templatePathToMerge = plugins.path.join(this.dirPath, dependency);
-      if(!plugins.smartfile.fs.isDirectory(templatePathToMerge)) {
-        console.log(`dependency ${dependency} resolves to ${templatePathToMerge} which ist NOT a directory`);
+      if (!plugins.smartfile.fs.isDirectory(templatePathToMerge)) {
+        console.log(
+          `dependency ${dependency} resolves to ${templatePathToMerge} which ist NOT a directory`
+        );
         continue;
-      };
-      const templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(templatePathToMerge, '**/*');
+      }
+      const templateSmartfileArray = await plugins.smartfile.fs.fileTreeToObject(
+        templatePathToMerge,
+        '**/*'
+      );
       this.templateSmartfileArray = this.templateSmartfileArray.concat(templateSmartfileArray);
     }
   }

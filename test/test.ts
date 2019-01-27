@@ -3,7 +3,7 @@ import * as path from 'path';
 
 import * as smartscaf from '../ts/index';
 
-process.env.CI = 'true'
+process.env.CI = 'true';
 
 let testScafTemplate: smartscaf.ScafTemplate;
 
