@@ -7,8 +7,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "(tstest test/)",
-    "build": "(tsbuild)",
-    "testLocal": "(npmts --notest && ts-node --compilerOptions '{\"target\":\"es6\"}' test/test.ts)"
+    "build": "(tsbuild)"
   },
   "repository": {
     "type": "git",
@@ -26,21 +25,21 @@
     "npm"
   ],
   "devDependencies": {
-    "@gitzone/tsbuild": "^2.1.6",
+    "@gitzone/tsbuild": "^2.1.8",
     "@gitzone/tsrun": "^1.1.17",
     "@gitzone/tstest": "^1.0.18",
     "@pushrocks/tapbundle": "^3.0.7",
-    "@types/node": "^10.12.18"
+    "@types/node": "^11.9.4"
   },
   "dependencies": {
     "@pushrocks/lik": "^3.0.4",
     "@pushrocks/smartfile": "^6.0.12",
     "@pushrocks/smartfm": "^2.0.1",
-    "@pushrocks/smarthbs": "^2.0.0",
+    "@pushrocks/smarthbs": "^2.0.3",
     "@pushrocks/smartinteract": "^2.0.4",
     "@pushrocks/smartpromise": "^2.0.5",
     "@pushrocks/smartyaml": "^2.0.3",
-    "@types/lodash": "^4.14.120",
+    "@types/lodash": "^4.14.121",
     "lodash": "^4.17.11"
   }
 }

@@ -5,5 +5,15 @@
   "npmci": {
     "npmGlobalTools": [],
     "npmAccessLevel": "public"
+  },
+  "gitzone": {
+    "module": {
+      "githost": "gitlab.com",
+      "gitscope": "pushrocks",
+      "gitrepo": "smartscaf",
+      "shortDescription": "scaffold projects quickly",
+      "npmPackagename": "@pushrocks/smartscaf",
+      "license": "MIT"
+    }
   }
 }
