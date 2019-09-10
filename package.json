@@ -35,7 +35,7 @@
     "@pushrocks/lik": "^3.0.11",
     "@pushrocks/smartfile": "^7.0.4",
     "@pushrocks/smartfm": "^2.0.4",
-    "@pushrocks/smarthbs": "^2.0.4",
+    "@pushrocks/smarthbs": "^2.0.8",
     "@pushrocks/smartinteract": "^2.0.4",
     "@pushrocks/smartpromise": "^3.0.2",
     "@pushrocks/smartyaml": "^2.0.3"
