@@ -6,5 +6,6 @@ import * as smarthbs from '@pushrocks/smarthbs';
 import * as smartinteract from '@pushrocks/smartinteract';
 import * as smartq from '@pushrocks/smartpromise';
 import * as smartyaml from '@pushrocks/smartyaml';
+import * as smartshell from '@pushrocks/smartshell';
 
-export { path, lik, smartfile, smartfm, smarthbs, smartinteract, smartq, smartyaml };
+export { path, lik, smartfile, smartfm, smarthbs, smartinteract, smartq, smartyaml, smartshell };
