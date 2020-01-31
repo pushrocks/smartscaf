@@ -1,5 +1,5 @@
 export interface ISmartscafFile {
-  defaults: {[key:string]: string};
+  defaults: { [key: string]: string };
   dependencies: {
     merge: string[];
   };

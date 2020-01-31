@@ -1,6 +1,5 @@
 import * as plugins from './smartscaf.plugins';
 import * as interfaces from './interfaces';
-import * as helpers from './smartscaf.helpers';
 
 // interfaces
 import { Smartfile } from '@pushrocks/smartfile';
@@ -70,7 +69,7 @@ export class ScafTemplate {
     if (smartscafSmartfile) {
       smartscafFile = {
         ...smartscafFile,
-        ...await plugins.smartyaml.yamlStringToObject(smartscafSmartfile.contentBuffer.toString())
+        ...(await plugins.smartyaml.yamlStringToObject(smartscafSmartfile.contentBuffer.toString()))
       };
     }
     this.smartscafFile = smartscafFile;
@@ -117,7 +116,7 @@ export class ScafTemplate {
     }
     const answerBucket = await localSmartInteract.runQueue();
     await answerBucket.answerMap.forEach(async answer => {
-      await helpers.deepAddToObject(this.suppliedVariables, answer.name, answer.value);
+      await plugins.smartparam.smartAdd(this.suppliedVariables, answer.name, answer.value);
     });
   }
 
@@ -248,7 +247,7 @@ export class ScafTemplate {
     }
   }
 
-  private async runScripts () {
+  private async runScripts() {
     if (!this.destinationPath) {
       throw new Error('cannot run scripts without an destinationdir');
     }
